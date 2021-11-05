@@ -49,6 +49,85 @@ function cargarJuegos()
     return $coleccionJuegosPre;
 }
 
+/**
+ * Modulo que se encarga de agregar un juego a la coleccion de juegos
+ * @param array $arregloJuegos
+ * @param array $juegoNuevo
+ * @return array
+ */
+function agregarJuego($arregloJuegos, $juegoNuevo)
+{
+    $arregloJuegos[count($arregloJuegos)] = $juegoNuevo;
+    return $arregloJuegos;
+}
+
+/**
+ * Modulo que se encarga de pedir un numero y analizar si esta dentro de un rango
+ * @param int $extremo
+ * @return int
+ */
+function chequearNumero($extremo)
+{
+    //boolean $seguir
+    $seguir = true;
+    while ($seguir) {
+        echo "\nPor favor ingrese un numero valido: ";
+        $n = trim(fgets(STDIN));
+        if ($n >= 0 && $n < $extremo) {
+            $seguir = false;
+        } else {
+            echo "\nEl numero ingresado no es valido, intente de nuevo: ";
+        }
+    }
+    return $n;
+}
+
+/**
+ * Modulo que se encarga de retornar un string con el resultado de un juego
+ * @param array $juego
+ * @return string
+ */
+function cadenaResultado($juego)
+{
+    if ($juego["puntosCruz"] == 1) {
+        $cadena = "Empate";
+    } else {
+        if ($juego["puntosCruz"] < $juego["puntosCirculo"]) {
+            $cadena = "Gano O";
+        } else {
+            $cadena = "Gano X";
+        }
+    }
+    return $cadena;
+}
+
+/**
+ * Modulo que se encarga de retornar un string con los datos de un juego determinado para un jugador
+ * @param array $juego
+ * @param string $jugador
+ * @return string
+ */
+function cadenaJugador($juego, $jugador)
+{
+    if ($jugador == "X") {
+        $cadena = "\nJugador X: " . $juego["jugadorCruz"] . " obtuvo " . $juego["puntosCruz"] . " puntos.";
+    } else {
+        $cadena = "\nJugador O: " . $juego["jugadorCirculo"] . " obtuvo " . $juego["puntosCirculo"] . " puntos.";
+    }
+    return $cadena;
+}
+
+/**
+ * Modulo para mostrar un juego elegido por el usuario
+ * @param array $arregloJuegos
+ */
+function mostrarJuego($arregloJuegos)
+{
+    //int $n
+    $n = chequearNumero(count($arregloJuegos));
+    $resultado = cadenaResultado($arregloJuegos[$n]);
+    echo "\n*************************************\nJuego TATETI: $resultado .\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
+}
 
 
 
@@ -68,11 +147,11 @@ do {
     $opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1: {
-            $juegosTateti[count($juegosTateti)] = jugar();
+            agregarJuego($juegosTateti, jugar());
             break;
         }
         case 2: {
-
+            mostrarJuego($juegosTateti);
             break;
         }
         case 3: {
