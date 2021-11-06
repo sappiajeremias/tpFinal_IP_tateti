@@ -73,7 +73,7 @@ function chequearNumero($extremo)
     while ($seguir) {
         echo "\nPor favor ingrese un numero valido: ";
         $n = trim(fgets(STDIN));
-        if ($n >= 0 && $n < $extremo) {
+        if ($n > 0 && $n <= $extremo) {
             $seguir = false;
         } else {
             echo "\nEl numero ingresado no es valido, intente de nuevo: ";
@@ -121,12 +121,73 @@ function cadenaJugador($juego, $jugador)
  * Modulo para mostrar un juego elegido por el usuario
  * @param array $arregloJuegos
  */
-function mostrarJuego($arregloJuegos)
+function mostrarJuegoDado($arregloJuegos)
 {
     //int $n
-    $n = chequearNumero(count($arregloJuegos));
+    $n = chequearNumero(count($arregloJuegos)) - 1;
     $resultado = cadenaResultado($arregloJuegos[$n]);
-    echo "\n*************************************\nJuego TATETI: $resultado .\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
+    echo "\n*************************************\nJuego TATETI: " . $n + 1 . " " . $resultado . "\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
+}
+
+/**
+ * Modulo para mostrar un juego en base a un indice ya chequeado
+ * @param array $arregloJuegos
+ */
+function mostrarJuegoChequeado($arregloJuegos, $n)
+{
+    $resultado = cadenaResultado($arregloJuegos[$n]);
+    echo "\n*************************************\nJuego TATETI: " . $n+1 . " " . $resultado ."\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
+}
+
+/**
+ * Modulo que se encarga de devolver el primer juego ganado por un jugador ingresado por el usuario
+ * @param array $arregloJuegos
+ */
+function primerVictoria($arregloJuegos)
+{
+    //int $indiceJuego
+    //string $nombre
+    echo "\nPor favor ingrese un nombre para buscar su primera victoria (Ejemplo: 'Jere', 'Manu'): ";
+    $nombre = trim(fgets(STDIN));
+    $indiceJuego = buscarJuegoNombre($arregloJuegos, $nombre);
+    if ($indiceJuego >= 0){
+        mostrarJuegoChequeado($arregloJuegos, $indiceJuego);
+    } else {
+        echo "\nEl jugador ingresado no tiene victorias.";
+    }
+    
+}
+
+/**
+ * Modulo que se encarga de devolver el indice de la primer victoria de un jugador dado
+ * @param array $arregloJuegos
+ * @param string $nombreDado
+ * @return int
+ */
+function buscarJuegoNombre($arregloJuegos, $nombreDado)
+{
+    //boolean $seguir
+    //int $i
+    //Le damos un valor a $indice para chequear al final si el jugador ingresado no tiene victoria
+    $indice = -1;
+    $seguir = true;
+    $i = 0;
+    while ($seguir && $i < count($arregloJuegos)) {
+        $juego = $arregloJuegos[$i];
+        //Comenzamos a comparar por nombre y luego si los puntos significan que gano
+        if ($juego["jugadorCruz"] == $nombreDado && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
+            $indice = $i;
+            $seguir = false;
+        } else {
+            if ($juego["jugadorCirculo"] == $nombreDado && $juego["puntosCirculo"] > $juego["puntosCirculo"]) {
+                $indice = $i;
+                $seguir = false;
+            } else {
+                $i++;
+            }
+        }
+    }
+    return $indice;
 }
 
 
@@ -151,11 +212,11 @@ do {
             break;
         }
         case 2: {
-            mostrarJuego($juegosTateti);
+            mostrarJuegoDado($juegosTateti);
             break;
         }
         case 3: {
-
+            primerVictoria($juegosTateti);
             break;
         }
         case 4: {
