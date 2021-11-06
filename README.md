@@ -13,3 +13,8 @@ JEREMIAS SAPPIA
 Legajo : FAI - 2532
 MAIL: jeremiassappia@gmail.com
 USUARIO: sappiajeremias
+
+MANUEL NAGEL
+LEGAJO: FAI- 2595
+MAIL: juanmanage@gmail.com
+USUARIO: manuelNagel
