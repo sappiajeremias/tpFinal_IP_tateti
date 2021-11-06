@@ -57,8 +57,10 @@ function cargarJuegos()
  */
 function agregarJuego($arregloJuegos, $juegoNuevo)
 {
-    $arregloJuegos[count($arregloJuegos)] = $juegoNuevo;
-    return $arregloJuegos;
+    $arregloNuevo = [];
+    $arregloNuevo = $arregloJuegos;
+    $arregloNuevo[count($arregloNuevo)] = $juegoNuevo;
+    return $arregloNuevo;
 }
 
 /**
@@ -271,7 +273,8 @@ do {
     $opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1: {
-            agregarJuego($juegosTateti, jugar());
+            $juegoNuevo = jugar();
+            $juegosTateti = agregarJuego($juegosTateti, $juegoNuevo);
             break;
         }
         case 2: {
