@@ -1,5 +1,5 @@
 <?php
-
+//Hola
 //Incluimos el archivo tateti con todas las funciones basicas
 include_once("tateti.php");
 
