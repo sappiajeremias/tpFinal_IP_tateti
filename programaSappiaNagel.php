@@ -83,6 +83,18 @@ function chequearNumero($extremo)
 }
 
 /**
+ * Modulo que se encarga de devolver un juego del arreglo
+ * @param array $arregloJuegos
+ * @param int $n
+ * @return array
+ */
+function buscarJuego($arregloJuegos, $n)
+{
+    $juego = $arregloJuegos[$n];
+    return $juego;
+}
+
+/**
  * Modulo que se encarga de retornar un string con el resultado de un juego
  * @param array $juego
  * @return string
@@ -150,12 +162,11 @@ function primerVictoria($arregloJuegos)
     echo "\nPor favor ingrese un nombre para buscar su primera victoria (Ejemplo: 'Jere', 'Manu'): ";
     $nombre = trim(fgets(STDIN));
     $indiceJuego = buscarJuegoNombre($arregloJuegos, $nombre);
-    if ($indiceJuego >= 0){
+    if ($indiceJuego >= 0) {
         mostrarJuegoChequeado($arregloJuegos, $indiceJuego);
     } else {
         echo "\nEl jugador ingresado no tiene victorias.";
     }
-    
 }
 
 /**
@@ -190,6 +201,58 @@ function buscarJuegoNombre($arregloJuegos, $nombreDado)
     return $indice;
 }
 
+/**
+ * Modulo que se encarga de retornar el porcentaje de victoria de uno de los simbolos
+ * @param array $arregloJuegos
+ * @param string $simbolo
+ * @return int
+ */
+function porcentajeVictoria($arregloJuegos, $simbolo)
+{
+    //int $contadorVictorias
+    //boolean $ganador
+    $contadorVictorias = 0;
+    for ($i = 0; $i < count($arregloJuegos); $i++) {
+        $ganador = simboloGanador(buscarJuego($arregloJuegos, $i), $simbolo);
+        if ($ganador == true){
+            $contadorVictorias++;
+        }
+    }
+    $porcentaje = (int)((100 * $contadorVictorias) / count($arregloJuegos));
+    return $porcentaje;
+}
+
+/**
+ * Modulo que se encarga de chequear si un simbolo es el ganador de un juego
+ * @param array $juego
+ * @param string $simbolo
+ * @return boolean
+ */
+function simboloGanador($juego, $simbolo)
+{
+    if ($simbolo == "X" && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
+        return true;
+    } else {
+        if ($simbolo == "O" && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
+            return true;
+        } else{
+            return false;
+        }
+    }
+}
+
+/**
+ * Modulo que se encarga de mostrar el porcentaje de victoria
+ * @param array $arregloJuegos
+ */
+function mostrarPorcentaje ($arregloJuegos){
+    //int $porcentaje
+    //string $simbolo
+    echo "\nPor favor ingrese el simbolo a buscar su porcentaje (X, O): ";
+    $simbolo = trim(fgets(STDIN));
+    $porcentaje = porcentajeVictoria($arregloJuegos,$simbolo);
+    echo "\nEl porcentaje de victoria del simbolo $simbolo es de: $porcentaje %. ";
+}
 
 
 
@@ -220,7 +283,7 @@ do {
             break;
         }
         case 4: {
-
+            mostrarPorcentaje($juegosTateti);
             break;
         }
         case 5: {
