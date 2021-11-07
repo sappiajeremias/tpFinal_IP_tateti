@@ -3,7 +3,9 @@
 //Incluimos el archivo tateti con todas las funciones basicas
 include_once("tateti.php");
 
-//FUNCIONES
+/**
+ * FUNCIONES
+ */
 
 /**
  * Modulo para seleccionar una opcion.
