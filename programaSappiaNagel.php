@@ -252,10 +252,28 @@ function simboloGanador($juego, $simbolo)
 function mostrarPorcentaje ($arregloJuegos){
     //int $porcentaje
     //string $simbolo
-    echo "\nPor favor ingrese el simbolo a buscar su porcentaje (X, O): ";
-    $simbolo = trim(fgets(STDIN));
+    $simbolo = chequearSimbolo();
     $porcentaje = porcentajeVictoria($arregloJuegos,$simbolo);
     echo "\nEl porcentaje de victoria del simbolo $simbolo es de: $porcentaje %. ";
+}
+
+/**
+ * Modulo que se encarga de chequear que el usuario ingrese un simbolo correcto
+ * @return string
+ */
+function chequearSimbolo () {
+    //boolean $seguir
+    $seguir = true;
+    while ($seguir){
+        echo "\nPor favor ingrese el simbolo a buscar su porcentaje (X, O): ";
+        $simbolo = trim(fgets(STDIN));
+        if ($simbolo == "X" || $simbolo == "O"){
+            $seguir = false;
+        } else {
+            echo "\nEl simbolo ingresado no es correcto, intente de nuevo.";
+        }
+    }
+    return $simbolo;
 }
 
 
