@@ -38,7 +38,7 @@ function cargarJuegos()
 {
     //Inicializamos el arreglo que va a almacenar los juegos ya creados
     $coleccionJuegosPre = [];
-    $coleccionJuegosPre[0] = ["jugadorCruz" => "Jere" , "jugadorCirculo" => "Manu", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[0] = ["jugadorCruz" => "Manu" , "jugadorCirculo" => "Jere", "puntosCruz" => 1, "puntosCirculo" => 1];
     $coleccionJuegosPre[1] = ["jugadorCruz" => "Jere", "jugadorCirculo" => "Juan", "puntosCruz" => 6, "puntosCirculo" => 0];
     $coleccionJuegosPre[2] = ["jugadorCruz" => "Manu", "jugadorCirculo" => "Cris", "puntosCruz" => 0, "puntosCirculo" => 5];
     $coleccionJuegosPre[3] = ["jugadorCruz" => "Agus", "jugadorCirculo" => "Jere", "puntosCruz" => 6, "puntosCirculo" => 0];
