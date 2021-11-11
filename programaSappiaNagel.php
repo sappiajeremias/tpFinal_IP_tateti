@@ -38,16 +38,16 @@ function cargarJuegos()
 {
     //Inicializamos el arreglo que va a almacenar los juegos ya creados
     $coleccionJuegosPre = [];
-    $coleccionJuegosPre[0] = ["jugadorCruz" => "Manu" , "jugadorCirculo" => "Jere", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $coleccionJuegosPre[1] = ["jugadorCruz" => "Jere", "jugadorCirculo" => "Juan", "puntosCruz" => 6, "puntosCirculo" => 0];
-    $coleccionJuegosPre[2] = ["jugadorCruz" => "Manu", "jugadorCirculo" => "Cris", "puntosCruz" => 0, "puntosCirculo" => 5];
-    $coleccionJuegosPre[3] = ["jugadorCruz" => "Agus", "jugadorCirculo" => "Jere", "puntosCruz" => 6, "puntosCirculo" => 0];
-    $coleccionJuegosPre[4] = ["jugadorCruz" => "Manu", "jugadorCirculo" => "Emi", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $coleccionJuegosPre[5] = ["jugadorCruz" => "Juan", "jugadorCirculo" => "Jere", "puntosCruz" => 5, "puntosCirculo" => 0];
-    $coleccionJuegosPre[6] = ["jugadorCruz" => "Manu", "jugadorCirculo" => "Cris", "puntosCruz" => 0, "puntosCirculo" => 5];
-    $coleccionJuegosPre[7] = ["jugadorCruz" => "Agus", "jugadorCirculo" => "Manu", "puntosCruz" => 5, "puntosCirculo" => 0];
-    $coleccionJuegosPre[8] = ["jugadorCruz" => "Jere" , "jugadorCirculo" => "Manu", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $coleccionJuegosPre[9] = ["jugadorCruz" => "Emi", "jugadorCirculo" => "Agus", "puntosCruz" => 0, "puntosCirculo" => 6];
+    $coleccionJuegosPre[0] = ["jugadorCruz" => "manu" , "jugadorCirculo" => "jere", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[1] = ["jugadorCruz" => "jere", "jugadorCirculo" => "juan", "puntosCruz" => 6, "puntosCirculo" => 0];
+    $coleccionJuegosPre[2] = ["jugadorCruz" => "manu", "jugadorCirculo" => "cris", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $coleccionJuegosPre[3] = ["jugadorCruz" => "agus", "jugadorCirculo" => "jere", "puntosCruz" => 6, "puntosCirculo" => 0];
+    $coleccionJuegosPre[4] = ["jugadorCruz" => "manu", "jugadorCirculo" => "emi", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[5] = ["jugadorCruz" => "juan", "jugadorCirculo" => "jere", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $coleccionJuegosPre[6] = ["jugadorCruz" => "manu", "jugadorCirculo" => "cris", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $coleccionJuegosPre[7] = ["jugadorCruz" => "agus", "jugadorCirculo" => "manu", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $coleccionJuegosPre[8] = ["jugadorCruz" => "jere" , "jugadorCirculo" => "manu", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[9] = ["jugadorCruz" => "emi", "jugadorCirculo" => "agus", "puntosCruz" => 0, "puntosCirculo" => 6];
     return $coleccionJuegosPre;
 }
 
@@ -59,11 +59,23 @@ function cargarJuegos()
  */
 function agregarJuego($arregloJuegos, $juegoNuevo)
 {
-    $arregloNuevo = [];
+    $juegoNuevo = toLower($juegoNuevo);
     $arregloNuevo = $arregloJuegos;
     $arregloNuevo[count($arregloNuevo)] = $juegoNuevo;
     return $arregloNuevo;
 }
+
+/**
+ * Modulo que se encarga de devolver el juego nuevo con los nombres en lowercase
+ * @param array $juegoNuevo
+ * @return array
+ */
+function toLower ($juegoNuevo){
+    $juegoNuevo["jugadorCruz"] = strtolower($juegoNuevo["jugadorCruz"]);
+    $juegoNuevo["jugadorCirculo"] = strtolower($juegoNuevo["jugadorCirculo"]);
+    return $juegoNuevo;
+}
+
 
 /**
  * Modulo que se encarga de pedir un numero y analizar si esta dentro de un rango
@@ -190,11 +202,11 @@ function buscarJuegoNombre($arregloJuegos, $nombreDado)
     while ($seguir && $i < count($arregloJuegos)) {
         $juego = $arregloJuegos[$i];
         //Comenzamos a comparar por nombre y luego si los puntos significan que gano
-        if ($juego["jugadorCruz"] == $nombreDado && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
+        if ($juego["jugadorCruz"] == strtolower($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
             $indice = $i;
             $seguir = false;
         } else {
-            if ($juego["jugadorCirculo"] == $nombreDado && $juego["puntosCirculo"] > $juego["puntosCirculo"]) {
+            if ($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCirculo"]) {
                 $indice = $i;
                 $seguir = false;
             } else {
