@@ -368,7 +368,9 @@ do {
             break;
         }
         case 5: {
+            
             mostrarResumenJugador($juegosTateti);
+
             break;
         }
         case 6: {
