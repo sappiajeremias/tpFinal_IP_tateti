@@ -276,10 +276,9 @@ function chequearSimbolo () {
     return $simbolo;
 }
 
-
-
-
 /**
+ * 
+ * 
  * PROGRAMA PRINCIPAL
  */
 
