@@ -360,7 +360,7 @@ do {
             break;
         }
         case 5: {
-            echo "ingrese el nombre del jugador a resumir";
+            echo "ingrese el nombre del jugador a resumir ";
             $nombreJugador=trim(fgets(STDIN));
             mostrarResumenJugador($juegosTateti,$nombreJugador);
 
