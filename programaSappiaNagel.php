@@ -241,8 +241,8 @@ function porcentajeVictoria($arregloJuegos, $simbolo)
 /**
  * Modulo que se encarga de chequear si un simbolo es el ganador de un juego
  * @param array $juego
- * @param string $simbolo
- * @return boolean
+ * @param string nombre
+ * @return int 
  */
 function simboloGanador($juego, $simbolo)
 {
@@ -289,6 +289,45 @@ function chequearSimbolo () {
 }
 
 /**
+ * este modulo hace el resumen de un jugador y lo imprime
+ * @param array $juego
+ * @param string $simbolo
+ *  
+ */
+function mostrarResumenJugador($arregloJuegos,$nombreDado){
+    
+    //int $i,$emp,$gan,$per
+    //string interfaz
+    $interfaz="***********************************";
+    $i = 0;
+    $emp=0;
+    $gan=0;
+    $per=0;
+    $puntos=0;
+
+    for($i;$i<count($arregloJuegos);$i++){
+        $juego=$arregloJuegos[$i];
+        if($juego["jugadorCruz"]==strtolower($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]){
+            $gan++;
+            $puntos=$juego["puntosCruz"]+$puntos;
+        }elseif($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]){
+            $gan++;
+            $puntos=$juego["puntosCirculo"]+$puntos;
+        }elseif(($juego["jugadorCruz"]==strtolower($nombreDado)||$juego["jugadorCirculo"]==strtolower($nombreDado))&& $juego["puntosCirculo"]==$juego["puntosCruz"]){
+            $emp++;
+            $puntos++;
+        }elseif($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] < $juego["puntosCruz"]){
+            $per++;
+        }elseif($juego["jugadorCruz"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]){
+            $per++;
+        }
+        
+    }
+    echo $interfaz."\n Jugador: ".$nombreDado."\n Gano: ".$gan."\n perdio: ".$per."\n empato: ".$emp."\n Total de puntos: ".$puntos."\n".
+        $interfaz;
+}
+
+/**
  * 
  * 
  * PROGRAMA PRINCIPAL
@@ -321,6 +360,9 @@ do {
             break;
         }
         case 5: {
+            echo "ingrese el nombre del jugador a resumir";
+            $nombreJugador=trim(fgets(STDIN));
+            mostrarResumenJugador($juegosTateti,$nombreJugador);
 
             break;
         }

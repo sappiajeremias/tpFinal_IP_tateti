@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 La librería tateti posee la definición de constantes y funciones necesarias
 para jugar al tateti.
