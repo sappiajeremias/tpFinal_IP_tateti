@@ -50,10 +50,9 @@ function cargarJuegos()
     $coleccionJuegosPre[9] = ["jugadorCruz" => "emi", "jugadorCirculo" => "agus", "puntosCruz" => 0, "puntosCirculo" => 6];
     return $coleccionJuegosPre;
 }
-
+                                                                                                                                     
 /**
- * Modulo que se encarga de agregar un juego a la coleccion de juegos
- * @param array $arregloJuegos
+ * Modulo que se encarga de agregar un juego a la coleccion de juegos *                                                              
  * @param array $juegoNuevo
  * @return array
  */
@@ -328,6 +327,36 @@ function mostrarResumenJugador($arregloJuegos,$nombreDado){
 }
 
 /**
+ * este modulo extrae de un array un indice tanto asociativo como numerico ,
+ * @param array $arregloJuegos
+ * @param string $indiceElegido
+ * 
+ */
+function sortearAlfabeticamente($arregloJuegos,$indiceElegido) {
+	//array $aux, $arregloSorteado
+    //string $clave,$valor
+    /*
+    loopea extrayendo la clave y valor de cada juego segun el indice elegido(en este practico pide solo para jugadoresCirculo) y lo asigna al arreglo auxiliar $aux
+    */
+	foreach($arregloJuegos as $clave=>$valor) {
+		$aux[] = strtolower($valor[$indiceElegido]);
+	}
+	
+	//sortea alfabeticamente o por orden numerico ascendente al arreglo
+	
+	asort($aux);
+	
+	//printea de manera que es legible para un "humano".Esto quiere decir que imprime el arreglo mostrando
+    //las claves y elementos en un formato predeterminado similar a Json.
+	print_r($aux);
+	
+	foreach($aux as $clave=>$valor) {
+		$arregloSorteado[] = $arregloJuegos[$clave];
+	}
+	
+	return $arregloSorteado;
+}
+/**
  * 
  * 
  * PROGRAMA PRINCIPAL
@@ -366,7 +395,7 @@ do {
 
             break;
         }
-        case 6: {
+        case 6: { print_r(sortearAlfabeticamente($juegosTateti,"jugadorCirculo"));
 
             break;
         }
