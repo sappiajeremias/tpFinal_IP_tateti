@@ -69,7 +69,8 @@ function agregarJuego($arregloJuegos, $juegoNuevo)
  * @param array $juegoNuevo
  * @return array
  */
-function toLower ($juegoNuevo){
+function toLower($juegoNuevo)
+{
     $juegoNuevo["jugadorCruz"] = strtolower($juegoNuevo["jugadorCruz"]);
     $juegoNuevo["jugadorCirculo"] = strtolower($juegoNuevo["jugadorCirculo"]);
     return $juegoNuevo;
@@ -229,7 +230,7 @@ function porcentajeVictoria($arregloJuegos, $simbolo)
     $contadorVictorias = 0;
     for ($i = 0; $i < count($arregloJuegos); $i++) {
         $ganador = simboloGanador(buscarJuego($arregloJuegos, $i), $simbolo);
-        if ($ganador == true){
+        if ($ganador == true) {
             $contadorVictorias++;
         }
     }
@@ -241,7 +242,7 @@ function porcentajeVictoria($arregloJuegos, $simbolo)
  * Modulo que se encarga de chequear si un simbolo es el ganador de un juego
  * @param array $juego
  * @param string nombre
- * @return int 
+ * @return int
  */
 function simboloGanador($juego, $simbolo)
 {
@@ -250,7 +251,7 @@ function simboloGanador($juego, $simbolo)
     } else {
         if ($simbolo == "O" && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
@@ -260,11 +261,12 @@ function simboloGanador($juego, $simbolo)
  * Modulo que se encarga de mostrar el porcentaje de victoria
  * @param array $arregloJuegos
  */
-function mostrarPorcentaje ($arregloJuegos){
+function mostrarPorcentaje($arregloJuegos)
+{
     //int $porcentaje
     //string $simbolo
     $simbolo = chequearSimbolo();
-    $porcentaje = porcentajeVictoria($arregloJuegos,$simbolo);
+    $porcentaje = porcentajeVictoria($arregloJuegos, $simbolo);
     echo "\nEl porcentaje de victoria del simbolo $simbolo es de: $porcentaje %. ";
 }
 
@@ -272,13 +274,14 @@ function mostrarPorcentaje ($arregloJuegos){
  * Modulo que se encarga de chequear que el usuario ingrese un simbolo correcto
  * @return string
  */
-function chequearSimbolo () {
+function chequearSimbolo()
+{
     //boolean $seguir
     $seguir = true;
-    while ($seguir){
+    while ($seguir) {
         echo "\nPor favor ingrese el simbolo a buscar su porcentaje (X, O): ";
         $simbolo = trim(fgets(STDIN));
-        if ($simbolo == "X" || $simbolo == "O"){
+        if ($simbolo == "X" || $simbolo == "O") {
             $seguir = false;
         } else {
             echo "\nEl simbolo ingresado no es correcto, intente de nuevo.";
@@ -288,43 +291,48 @@ function chequearSimbolo () {
 }
 
 /**
- * este modulo hace el resumen de un jugador y lo imprime
+ * Este modulo hace el resumen de un jugador y lo imprime
  * @param array $juego
  * @param string $simbolo
- *  
+ *
  */
-function mostrarResumenJugador($arregloJuegos,$nombreDado){
+function mostrarResumenJugador($arregloJuegos)
+{
     
     //int $i,$emp,$gan,$per
-    //string interfaz
-    $interfaz="***********************************";
     $i = 0;
     $emp=0;
     $gan=0;
     $per=0;
     $puntos=0;
 
-    for($i;$i<count($arregloJuegos);$i++){
+    echo "\nIngrese el nombre del jugador a resumir: ";
+    $nombreDado=trim(fgets(STDIN));
+
+    for ($i;$i<count($arregloJuegos);$i++) {
         $juego=$arregloJuegos[$i];
-        if($juego["jugadorCruz"]==strtolower($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]){
+        if ($juego["jugadorCruz"]==strtolower($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
             $gan++;
             $puntos=$juego["puntosCruz"]+$puntos;
-        }elseif($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]){
+        } elseif ($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
             $gan++;
             $puntos=$juego["puntosCirculo"]+$puntos;
-        }elseif(($juego["jugadorCruz"]==strtolower($nombreDado)||$juego["jugadorCirculo"]==strtolower($nombreDado))&& $juego["puntosCirculo"]==$juego["puntosCruz"]){
+        } elseif (($juego["jugadorCruz"]==strtolower($nombreDado)||$juego["jugadorCirculo"]==strtolower($nombreDado))&& $juego["puntosCirculo"]==$juego["puntosCruz"]) {
             $emp++;
             $puntos++;
-        }elseif($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] < $juego["puntosCruz"]){
+        } elseif ($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] < $juego["puntosCruz"]) {
             $per++;
-        }elseif($juego["jugadorCruz"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]){
+        } elseif ($juego["jugadorCruz"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
             $per++;
         }
-        
     }
-    echo $interfaz."\n Jugador: ".$nombreDado."\n Gano: ".$gan."\n perdio: ".$per."\n empato: ".$emp."\n Total de puntos: ".$puntos."\n".
-        $interfaz;
+    if ($gan == 0 && $emp == 0 && $per == 0) {
+        echo "\n***********************************\nEl jugador ingresado no participo en el tateti.\n***********************************\n";
+    } else {
+        echo "\n***********************************\nJugador: ".$nombreDado."\nGano: ".$gan."\nPerdio: ".$per."\nEmpato: ".$emp."\nTotal de puntos: ".$puntos."\n***********************************\n";
+    }
 }
+    
 
 /**
  * este modulo extrae de un array un indice tanto asociativo como numerico ,
@@ -389,9 +397,8 @@ do {
             break;
         }
         case 5: {
-            echo "ingrese el nombre del jugador a resumir ";
-            $nombreJugador=trim(fgets(STDIN));
-            mostrarResumenJugador($juegosTateti,$nombreJugador);
+            
+            mostrarResumenJugador($juegosTateti);
 
             break;
         }
