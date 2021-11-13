@@ -13,8 +13,10 @@ JEREMIAS SAPPIA
 Legajo : FAI - 2532
 MAIL: jeremiassappia@gmail.com
 USUARIO: sappiajeremias
+CARRERA: TUDW
 
 MANUEL NAGEL
 LEGAJO: FAI- 2595
 MAIL: juanmanage@gmail.com
 USUARIO: manuelNagel
+CARRERA: TUDW
