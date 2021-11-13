@@ -52,7 +52,7 @@ function cargarJuegos()
 }
                                                                                                                                      
 /**
- * Modulo que se encarga de agregar un juego a la coleccion de juegos *                                                              
+ * Modulo que se encarga de agregar un juego a la coleccion de juegos *
  * @param array $juegoNuevo
  * @return array
  */
@@ -334,39 +334,64 @@ function mostrarResumenJugador($arregloJuegos)
 }
     
 
-/**
- * este modulo extrae de un array un indice tanto asociativo como numerico ,
+/*
+ * Este modulo extrae de un array un indice tanto asociativo como numerico
  * @param array $arregloJuegos
  * @param string $indiceElegido
- * 
- */
-function sortearAlfabeticamente($arregloJuegos,$indiceElegido) {
-	//array $aux, $arregloSorteado
+ * @return array
+function sortearAlfabeticamente($arregloJuegos, $indiceElegido)
+{
+    //array $aux
     //string $clave,$valor
-    /*
-    loopea extrayendo la clave y valor de cada juego segun el indice elegido(en este practico pide solo para jugadoresCirculo) y lo asigna al arreglo auxiliar $aux
-    */
-	foreach($arregloJuegos as $clave=>$valor) {
-		$aux[] = strtolower($valor[$indiceElegido]);
-	}
-	
-	//sortea alfabeticamente o por orden numerico ascendente al arreglo
-	
-	asort($aux);
-	
-	//printea de manera que es legible para un "humano".Esto quiere decir que imprime el arreglo mostrando
-    //las claves y elementos en un formato predeterminado similar a Json.
-	print_r($aux);
-	
-	foreach($aux as $clave=>$valor) {
-		$arregloSorteado[] = $arregloJuegos[$clave];
-	}
-	
-	return $arregloSorteado;
+
+    Loopea extrayendo la clave y valor de cada juego segun el indice elegido(en este practico pide solo para jugadoresCirculo) y lo asigna al arreglo auxiliar $aux
+
+    foreach ($arregloJuegos as $clave=>$valor) {
+        $aux[] = strtolower($valor[$indiceElegido]);
+    }
+
+    //Sortea alfabeticamente o por orden numerico ascendente al arreglo
+
+    asort($aux);
+
+    //Printea de manera que es legible para un "humano".Esto quiere decir que imprime el arreglo mostrando
+    //Las claves y elementos en un formato predeterminado similar a Json.
+    print_r($aux);
+
+    foreach ($aux as $clave=>$valor) {
+        $arregloSorteado[] = $arregloJuegos[$clave];
+    }
+
+    return $arregloSorteado;
 }
+*/
 /**
- * 
- * 
+ * Modulo que se encarga de ordenar el arreglo en base a una condicion
+ * @param array $arregloJuegos
+ * @return array
+ */
+function ordenarPorO($arregloJuegos)
+{
+    uasort($arregloJuegos, 'verificarOrden');
+    return $arregloJuegos;
+}
+
+/**
+ * Modulo que se encarga de la funcion de comparacion
+ * @param array $a
+ * @param array $b
+ * @return int
+ */
+function verificarOrden($a, $b)
+{
+    $resultado = strcmp($a["jugadorCirculo"], $b["jugadorCirculo"]);
+    return $resultado;
+}
+
+
+/**
+ *
+ *
  * PROGRAMA PRINCIPAL
  */
 
@@ -397,22 +422,18 @@ do {
             break;
         }
         case 5: {
-            
             mostrarResumenJugador($juegosTateti);
-
             break;
         }
-        case 6: { print_r(sortearAlfabeticamente($juegosTateti,"jugadorCirculo"));
-
+        case 6: {
+            print_r(ordenarPorO($juegosTateti));
             break;
         }
         case 7: {
-            
             $seguir = false;
             break;
         }
         default: {
-            
             break;
         }
     }
