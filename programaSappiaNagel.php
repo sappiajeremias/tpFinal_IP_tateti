@@ -333,38 +333,6 @@ function mostrarResumenJugador($arregloJuegos)
     }
 }
     
-
-/*
- * Este modulo extrae de un array un indice tanto asociativo como numerico
- * @param array $arregloJuegos
- * @param string $indiceElegido
- * @return array
-function sortearAlfabeticamente($arregloJuegos, $indiceElegido)
-{
-    //array $aux
-    //string $clave,$valor
-
-    Loopea extrayendo la clave y valor de cada juego segun el indice elegido(en este practico pide solo para jugadoresCirculo) y lo asigna al arreglo auxiliar $aux
-
-    foreach ($arregloJuegos as $clave=>$valor) {
-        $aux[] = strtolower($valor[$indiceElegido]);
-    }
-
-    //Sortea alfabeticamente o por orden numerico ascendente al arreglo
-
-    asort($aux);
-
-    //Printea de manera que es legible para un "humano".Esto quiere decir que imprime el arreglo mostrando
-    //Las claves y elementos en un formato predeterminado similar a Json.
-    print_r($aux);
-
-    foreach ($aux as $clave=>$valor) {
-        $arregloSorteado[] = $arregloJuegos[$clave];
-    }
-
-    return $arregloSorteado;
-}
-*/
 /**
  * Modulo que se encarga de ordenar el arreglo en base a una condicion
  * @param array $arregloJuegos
@@ -388,10 +356,16 @@ function verificarOrden($a, $b)
     return $resultado;
 }
 
+/**
+ * Modulo que se encarga de retornar el arreglo de juegos
+ * @param array $arregloJuegos
+ */
+function printearArreglo ($arregloJuegos){
+    print_r($arregloJuegos);
+}
+
 
 /**
- *
- *
  * PROGRAMA PRINCIPAL
  */
 
@@ -422,11 +396,12 @@ do {
             break;
         }
         case 5: {
-            mostrarResumenJugador($juegosTateti);
+            mostrarResumenJugador($juegosTateti); 
             break;
         }
         case 6: {
-            print_r(ordenarPorO($juegosTateti));
+            $juegosTateti = ordenarPorO($juegosTateti);
+            printearArreglo($juegosTateti);
             break;
         }
         case 7: {
