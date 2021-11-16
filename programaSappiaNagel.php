@@ -34,6 +34,7 @@ function seleccionarOpcion()
  * Modulo para cargar 10 juegos predeterminados
  * @return array
  */
+//explicacion 3 punto 1
 function cargarJuegos()
 {
     //Inicializamos el arreglo que va a almacenar los juegos ya creados
@@ -56,6 +57,7 @@ function cargarJuegos()
  * @param array $juegoNuevo
  * @return array
  */
+//funcion pedida en la explicacion 3 punto 5
 function agregarJuego($arregloJuegos, $juegoNuevo)
 {
     $juegoNuevo = toLower($juegoNuevo);
@@ -76,20 +78,21 @@ function toLower($juegoNuevo)
     return $juegoNuevo;
 }
 
-
+//punto 3 de explicacion 3
 /**
  * Modulo que se encarga de pedir un numero y analizar si esta dentro de un rango
+ * @param int $inicio
  * @param int $extremo
  * @return int
  */
-function chequearNumero($extremo)
+function chequearNumero($inicio,$extremo)
 {
     //boolean $seguir
     $seguir = true;
     while ($seguir) {
         echo "\nPor favor ingrese un numero valido: ";
         $n = trim(fgets(STDIN));
-        if ($n > 0 && $n <= $extremo) {
+        if ($n > $inicio && $n <= $extremo) {
             $seguir = false;
         } else {
             echo "\nEl numero ingresado no es valido, intente de nuevo: ";
@@ -97,6 +100,7 @@ function chequearNumero($extremo)
     }
     return $n;
 }
+
 
 /**
  * Modulo que se encarga de devolver un juego del arreglo
@@ -149,12 +153,13 @@ function cadenaJugador($juego, $jugador)
  * Modulo para mostrar un juego elegido por el usuario
  * @param array $arregloJuegos
  */
+//funcion pedida en explicacion 3 punto 4
 function mostrarJuegoDado($arregloJuegos)
 {
     //int $n
-    $n = chequearNumero(count($arregloJuegos)) - 1;
+    $n = chequearNumero(0,count($arregloJuegos)) - 1;
     $resultado = cadenaResultado($arregloJuegos[$n]);
-    echo "\n*************************************\nJuego TATETI: " . $n + 1 . " " . $resultado . "\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
+    echo "\n*************************************\nJuego TATETI: " .( $n + 1 ). " " . $resultado . "\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
 }
 
 /**
@@ -191,6 +196,7 @@ function primerVictoria($arregloJuegos)
  * @param string $nombreDado
  * @return int
  */
+//funcion pedida en explicacion 3 punto 6
 function buscarJuegoNombre($arregloJuegos, $nombreDado)
 {
     //boolean $seguir
@@ -225,7 +231,19 @@ function buscarJuegoNombre($arregloJuegos, $nombreDado)
  */
 function porcentajeVictoria($arregloJuegos, $simbolo)
 {
-    //int $contadorVictorias
+   $contadorVictorias=victoriaSimbolo($arregloJuegos,$simbolo);
+    $porcentaje = (int)((100 * $contadorVictorias) / contadorVictorias($arregloJuegos));
+    return $porcentaje;
+}
+
+/**
+ * Modulo que se encarga de retornar la cantidad de juegos ganados por un simbolo
+ * @param array $arregloJuegos
+ * @param string $simbolo
+ * @return int
+ */
+//funcion pedida en explicacion 3 punto 10
+function victoriaSimbolo($arregloJuegos,$simbolo){
     //boolean $ganador
     $contadorVictorias = 0;
     for ($i = 0; $i < count($arregloJuegos); $i++) {
@@ -234,15 +252,38 @@ function porcentajeVictoria($arregloJuegos, $simbolo)
             $contadorVictorias++;
         }
     }
-    $porcentaje = (int)((100 * $contadorVictorias) / count($arregloJuegos));
-    return $porcentaje;
+    return $contadorVictorias;
+
+}
+
+/**
+ * Modulo que se encarga de retornar la cantidad de victorias de un arreglo
+ * @param array $arregloJuegos
+ 
+ * @return int
+ */
+//funcion pedida en explicacion 3 punto 9
+function contadorVictorias($arregloJuegos)
+{
+    //int $contadorVictorias
+    //boolean $ganador
+    $cantidadVictorias = 0;
+    for ($i = 0; $i < count($arregloJuegos); $i++) {
+        $juegoActual=$arregloJuegos[$i];
+        
+        if ($juegoActual["puntosCirculo"]<>1) {
+            $cantidadVictorias++;
+        }
+    }
+    
+    return $cantidadVictorias;
 }
 
 /**
  * Modulo que se encarga de chequear si un simbolo es el ganador de un juego
  * @param array $juego
  * @param string nombre
- * @return int
+ * @return boolean
  */
 function simboloGanador($juego, $simbolo)
 {
@@ -274,6 +315,7 @@ function mostrarPorcentaje($arregloJuegos)
  * Modulo que se encarga de chequear que el usuario ingrese un simbolo correcto
  * @return string
  */
+//funcion pedida en la explicacion 3 punto 8
 function chequearSimbolo()
 {
     //boolean $seguir
@@ -296,40 +338,41 @@ function chequearSimbolo()
  * @param string $simbolo
  *
  */
+//funcion que pide en la explicacion 3 punto 7
 function mostrarResumenJugador($arregloJuegos)
 {
     
-    //int $i,$emp,$gan,$per
+    //int $i,$juegosEmpatados,$juegosGanados,$juegosPerdidos
     $i = 0;
-    $emp=0;
-    $gan=0;
-    $per=0;
-    $puntos=0;
+    $juegosEmpatados=0;
+    $juegosGanados=0;
+    $juegosPerdidos=0;
+    $puntosAcumulados=0;
 
     echo "\nIngrese el nombre del jugador a resumir: ";
-    $nombreDado=trim(fgets(STDIN));
+    $nombre=trim(fgets(STDIN));
 
     for ($i;$i<count($arregloJuegos);$i++) {
         $juego=$arregloJuegos[$i];
-        if ($juego["jugadorCruz"]==strtolower($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
-            $gan++;
-            $puntos=$juego["puntosCruz"]+$puntos;
-        } elseif ($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
-            $gan++;
-            $puntos=$juego["puntosCirculo"]+$puntos;
-        } elseif (($juego["jugadorCruz"]==strtolower($nombreDado)||$juego["jugadorCirculo"]==strtolower($nombreDado))&& $juego["puntosCirculo"]==$juego["puntosCruz"]) {
-            $emp++;
-            $puntos++;
-        } elseif ($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] < $juego["puntosCruz"]) {
-            $per++;
-        } elseif ($juego["jugadorCruz"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
-            $per++;
+        if ($juego["jugadorCruz"]==strtolower($nombre) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
+            $juegosGanados++;
+            $puntosAcumulados=$juego["puntosCruz"]+$puntosAcumulados;
+        } elseif ($juego["jugadorCirculo"] == strtolower($nombre) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
+            $juegosGanados++;
+            $puntosAcumulados=$juego["puntosCirculo"]+$puntosAcumulados;
+        } elseif (($juego["jugadorCruz"]==strtolower($nombre)||$juego["jugadorCirculo"]==strtolower($nombre))&& $juego["puntosCirculo"]==$juego["puntosCruz"]) {
+            $juegosEmpatados++;
+            $puntosAcumulados++;
+        } elseif ($juego["jugadorCirculo"] == strtolower($nombre) && $juego["puntosCirculo"] < $juego["puntosCruz"]) {
+            $juegosPerdidos++;
+        } elseif ($juego["jugadorCruz"] == strtolower($nombre) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
+            $juegosPerdidos++;
         }
     }
-    if ($gan == 0 && $emp == 0 && $per == 0) {
+    if ($juegosGanados == 0 && $juegosEmpatados == 0 && $juegosPerdidos == 0) {
         echo "\n***********************************\nEl jugador ingresado no participo en el tateti.\n***********************************\n";
     } else {
-        echo "\n***********************************\nJugador: ".$nombreDado."\nGano: ".$gan."\nPerdio: ".$per."\nEmpato: ".$emp."\nTotal de puntos: ".$puntos."\n***********************************\n";
+        echo "\n***********************************\nJugador: ".$nombre."\nGano: ".$juegosGanados."\nPerdio: ".$juegosPerdidos."\nEmpato: ".$juegosEmpatados."\nTotal de puntos: ".$puntosAcumulados."\n***********************************\n";
     }
 }
     
@@ -338,6 +381,7 @@ function mostrarResumenJugador($arregloJuegos)
  * @param array $arregloJuegos
  * @return array
  */
+//funcion pedida por explicacion 3 punto 11
 function ordenarPorO($arregloJuegos)
 {
     uasort($arregloJuegos, 'verificarOrden');
@@ -376,7 +420,8 @@ function printearArreglo ($arregloJuegos){
 $seguir = true;
 do {
     //Declaramos la variable que va a definir las opciones
-    $opcion = seleccionarOpcion();
+    $opcion = seleccionarOpcion(); //explicacion 3 punto 2
+    //estructura de control alternativa selectiva que selecciona entre multiples  alternativas en base a una expresion de control o selector
     switch ($opcion) {
         case 1: {
             $juegoNuevo = jugar();
