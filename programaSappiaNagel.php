@@ -169,7 +169,7 @@ function mostrarJuegoDado($arregloJuegos)
 function mostrarJuegoChequeado($arregloJuegos, $n)
 {
     $resultado = cadenaResultado($arregloJuegos[$n]);
-    echo "\n*************************************\nJuego TATETI: " . $n+1 . " " . $resultado ."\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
+    echo "\n*************************************\nJuego TATETI: " . ($n+1) . " " . $resultado ."\n" . cadenaJugador($arregloJuegos[$n], "X") . "\n" .  cadenaJugador($arregloJuegos[$n], "O") . "\n*************************************\n";
 }
 
 /**
@@ -322,7 +322,7 @@ function chequearSimbolo()
     $seguir = true;
     while ($seguir) {
         echo "\nPor favor ingrese el simbolo a buscar su porcentaje (X, O): ";
-        $simbolo = trim(fgets(STDIN));
+        $simbolo = strtoupper(trim(fgets(STDIN)));
         if ($simbolo == "X" || $simbolo == "O") {
             $seguir = false;
         } else {
@@ -334,15 +334,14 @@ function chequearSimbolo()
 
 /**
  * Este modulo hace el resumen de un jugador y lo imprime
- * @param array $juego
- * @param string $simbolo
+ * @param array $arregloJuegos
  *
  */
 //funcion que pide en la explicacion 3 punto 7
 function mostrarResumenJugador($arregloJuegos)
 {
     
-    //int $i,$juegosEmpatados,$juegosGanados,$juegosPerdidos
+    //int $i,$juegosEmpatados,$juegosGanados,$juegosPerdidos,$puntosAcumulados
     $i = 0;
     $juegosEmpatados=0;
     $juegosGanados=0;
