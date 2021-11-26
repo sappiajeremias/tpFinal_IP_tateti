@@ -37,18 +37,34 @@ function seleccionarOpcion()
 //explicacion 3 punto 1
 function cargarJuegos()
 {
+    
     //Inicializamos el arreglo que va a almacenar los juegos ya creados
     $coleccionJuegosPre = [];
-    $coleccionJuegosPre[0] = ["jugadorCruz" => "manu" , "jugadorCirculo" => "jere", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $coleccionJuegosPre[1] = ["jugadorCruz" => "jere", "jugadorCirculo" => "juan", "puntosCruz" => 6, "puntosCirculo" => 0];
-    $coleccionJuegosPre[2] = ["jugadorCruz" => "manu", "jugadorCirculo" => "cris", "puntosCruz" => 0, "puntosCirculo" => 5];
-    $coleccionJuegosPre[3] = ["jugadorCruz" => "agus", "jugadorCirculo" => "jere", "puntosCruz" => 6, "puntosCirculo" => 0];
-    $coleccionJuegosPre[4] = ["jugadorCruz" => "manu", "jugadorCirculo" => "emi", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $coleccionJuegosPre[5] = ["jugadorCruz" => "juan", "jugadorCirculo" => "jere", "puntosCruz" => 5, "puntosCirculo" => 0];
-    $coleccionJuegosPre[6] = ["jugadorCruz" => "manu", "jugadorCirculo" => "cris", "puntosCruz" => 0, "puntosCirculo" => 5];
-    $coleccionJuegosPre[7] = ["jugadorCruz" => "agus", "jugadorCirculo" => "manu", "puntosCruz" => 5, "puntosCirculo" => 0];
-    $coleccionJuegosPre[8] = ["jugadorCruz" => "jere" , "jugadorCirculo" => "manu", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $coleccionJuegosPre[9] = ["jugadorCruz" => "emi", "jugadorCirculo" => "agus", "puntosCruz" => 0, "puntosCirculo" => 6];
+    $coleccionJuegosPre[0] = ["jugadorCruz" => "MANU" , "jugadorCirculo" => "JERE", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[1] = ["jugadorCruz" => "JERE", "jugadorCirculo" => "JUAN", "puntosCruz" => 6, "puntosCirculo" => 0];
+    $coleccionJuegosPre[2] = ["jugadorCruz" => "MANU", "jugadorCirculo" => "CRIS", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $coleccionJuegosPre[3] = ["jugadorCruz" => "AGUS", "jugadorCirculo" => "JERE", "puntosCruz" => 6, "puntosCirculo" => 0];
+    $coleccionJuegosPre[4] = ["jugadorCruz" => "MANU", "jugadorCirculo" => "EMI", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[5] = ["jugadorCruz" => "JUAN", "jugadorCirculo" => "JERE", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $coleccionJuegosPre[6] = ["jugadorCruz" => "MANU", "jugadorCirculo" => "CRIS", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $coleccionJuegosPre[7] = ["jugadorCruz" => "AGUS", "jugadorCirculo" => "MANU", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $coleccionJuegosPre[8] = ["jugadorCruz" => "JERE" , "jugadorCirculo" => "MANU", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $coleccionJuegosPre[9] = ["jugadorCruz" => "EMI", "jugadorCirculo" => "AGUS", "puntosCruz" => 0, "puntosCirculo" => 6];
+    $coleccionJuegosPre = [];
+
+$jg1 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 1, "puntosCirculo" => 1];
+$jg2 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "AMARILIS", "puntosCruz" => 3, "puntosCirculo" => 0];
+$jg3 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "MILOS",    "puntosCruz" => 0, "puntosCirculo" => 4];
+$jg4 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+$jg5 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 5, "puntosCirculo" => 0];
+$jg6 = ["jugadorCruz" => "FEDORA",   "jugadorCirculo" => "CALIXTO",  "puntosCruz" => 0, "puntosCirculo" => 3];
+$jg7 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "AMARILIS", "puntosCruz" => 4, "puntosCirculo" => 0];
+$jg8 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+$jg9 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "FEDORA",   "puntosCruz" => 2, "puntosCirculo" => 0];
+$jg10= ["jugadorCruz" => "MILOS",    "jugadorCirculo" => "ZENDA",   "puntosCruz" => 1, "puntosCirculo" => 1];
+
+array_push($coleccionJuegosPre, $jg1, $jg2, $jg3, $jg4, $jg5, $jg6, $jg7, $jg8, $jg9, $jg10);
+
     return $coleccionJuegosPre;
 }
                                                                                                                                      
@@ -60,7 +76,7 @@ function cargarJuegos()
 //funcion pedida en la explicacion 3 punto 5
 function agregarJuego($arregloJuegos, $juegoNuevo)
 {
-    $juegoNuevo = toLower($juegoNuevo);
+    $juegoNuevo = toupper($juegoNuevo);
     $arregloNuevo = $arregloJuegos;
     $arregloNuevo[count($arregloNuevo)] = $juegoNuevo;
     return $arregloNuevo;
@@ -71,10 +87,10 @@ function agregarJuego($arregloJuegos, $juegoNuevo)
  * @param array $juegoNuevo
  * @return array
  */
-function toLower($juegoNuevo)
+function toupper($juegoNuevo)
 {
-    $juegoNuevo["jugadorCruz"] = strtolower($juegoNuevo["jugadorCruz"]);
-    $juegoNuevo["jugadorCirculo"] = strtolower($juegoNuevo["jugadorCirculo"]);
+    $juegoNuevo["jugadorCruz"] = strtoupper($juegoNuevo["jugadorCruz"]);
+    $juegoNuevo["jugadorCirculo"] = strtoupper($juegoNuevo["jugadorCirculo"]);
     return $juegoNuevo;
 }
 
@@ -176,12 +192,11 @@ function mostrarJuegoChequeado($arregloJuegos, $n)
  * Modulo que se encarga de devolver el primer juego ganado por un jugador ingresado por el usuario
  * @param array $arregloJuegos
  */
-function primerVictoria($arregloJuegos)
+function primerVictoria($arregloJuegos,$nom)
 {
     //int $indiceJuego
     //string $nombre
-    echo "\nPor favor ingrese un nombre para buscar su primera victoria (Ejemplo: 'Jere', 'Manu'): ";
-    $nombre = trim(fgets(STDIN));
+    $nombre=$nom;
     $indiceJuego = buscarJuegoNombre($arregloJuegos, $nombre);
     if ($indiceJuego >= 0) {
         mostrarJuegoChequeado($arregloJuegos, $indiceJuego);
@@ -208,11 +223,11 @@ function buscarJuegoNombre($arregloJuegos, $nombreDado)
     while ($seguir && $i < count($arregloJuegos)) {
         $juego = $arregloJuegos[$i];
         //Comenzamos a comparar por nombre y luego si los puntos significan que gano
-        if ($juego["jugadorCruz"] == strtolower($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
+        if ($juego["jugadorCruz"] == strtoupper($nombreDado) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
             $indice = $i;
             $seguir = false;
         } else {
-            if ($juego["jugadorCirculo"] == strtolower($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCirculo"]) {
+            if ($juego["jugadorCirculo"] == strtoupper($nombreDado) && $juego["puntosCirculo"] > $juego["puntosCirculo"]) {
                 $indice = $i;
                 $seguir = false;
             } else {
@@ -282,7 +297,7 @@ function contadorVictorias($arregloJuegos)
 /**
  * Modulo que se encarga de chequear si un simbolo es el ganador de un juego
  * @param array $juego
- * @param string nombre
+ * @param string $simbolo
  * @return boolean
  */
 function simboloGanador($juego, $simbolo)
@@ -335,10 +350,11 @@ function chequearSimbolo()
 /**
  * Este modulo hace el resumen de un jugador y lo imprime
  * @param array $arregloJuegos
+ * @param array $nombre
  *
  */
 //funcion que pide en la explicacion 3 punto 7
-function mostrarResumenJugador($arregloJuegos)
+function mostrarResumenJugador($arregloJuegos,$nom)
 {
     
     //int $i,$juegosEmpatados,$juegosGanados,$juegosPerdidos,$puntosAcumulados
@@ -347,24 +363,23 @@ function mostrarResumenJugador($arregloJuegos)
     $juegosGanados=0;
     $juegosPerdidos=0;
     $puntosAcumulados=0;
-
-    echo "\nIngrese el nombre del jugador a resumir: ";
-    $nombre=trim(fgets(STDIN));
+    $nombre=$nom;
+    
 
     for ($i;$i<count($arregloJuegos);$i++) {
         $juego=$arregloJuegos[$i];
-        if ($juego["jugadorCruz"]==strtolower($nombre) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
+        if ($juego["jugadorCruz"]==strtoupper($nombre) && $juego["puntosCruz"] > $juego["puntosCirculo"]) {
             $juegosGanados++;
             $puntosAcumulados=$juego["puntosCruz"]+$puntosAcumulados;
-        } elseif ($juego["jugadorCirculo"] == strtolower($nombre) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
+        } elseif ($juego["jugadorCirculo"] == strtoupper($nombre) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
             $juegosGanados++;
             $puntosAcumulados=$juego["puntosCirculo"]+$puntosAcumulados;
-        } elseif (($juego["jugadorCruz"]==strtolower($nombre)||$juego["jugadorCirculo"]==strtolower($nombre))&& $juego["puntosCirculo"]==$juego["puntosCruz"]) {
+        } elseif (($juego["jugadorCruz"]==strtoupper($nombre)||$juego["jugadorCirculo"]==strtoupper($nombre))&& $juego["puntosCirculo"]==$juego["puntosCruz"]) {
             $juegosEmpatados++;
             $puntosAcumulados++;
-        } elseif ($juego["jugadorCirculo"] == strtolower($nombre) && $juego["puntosCirculo"] < $juego["puntosCruz"]) {
+        } elseif ($juego["jugadorCirculo"] == strtoupper($nombre) && $juego["puntosCirculo"] < $juego["puntosCruz"]) {
             $juegosPerdidos++;
-        } elseif ($juego["jugadorCruz"] == strtolower($nombre) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
+        } elseif ($juego["jugadorCruz"] == strtoupper($nombre) && $juego["puntosCirculo"] > $juego["puntosCruz"]) {
             $juegosPerdidos++;
         }
     }
@@ -432,7 +447,9 @@ do {
             break;
         }
         case 3: {
-            primerVictoria($juegosTateti);
+            echo "\nPor favor ingrese un nombre para buscar su primera victoria (Ejemplo: 'JERE', 'MANU'): ";
+            $nombre = trim(fgets(STDIN));
+            primerVictoria($juegosTateti,$nombre);
             break;
         }
         case 4: {
@@ -440,7 +457,9 @@ do {
             break;
         }
         case 5: {
-            mostrarResumenJugador($juegosTateti); 
+            echo "\nIngrese el nombre del jugador a resumir: ";
+            $nombre=trim(fgets(STDIN));
+            mostrarResumenJugador($juegosTateti,$nombre); 
             break;
         }
         case 6: {
